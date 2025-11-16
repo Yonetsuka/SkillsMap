@@ -5,10 +5,7 @@
 
 ## 🧠 Sobre o projeto
 
-O **SkillTracker** é um aplicativo desenvolvido em **React Native com Expo** que permite ao usuário registrar competências que deseja aprender, acompanhar o nível de progresso e salvar tudo localmente no dispositivo usando **AsyncStorage**.
-
-O app é ideal para gerenciamento pessoal de aprendizado, ajudando o usuário a registrar habilidades e evoluir continuamente.
-
+w
 ---
 
 ## 🚀 Funcionalidades

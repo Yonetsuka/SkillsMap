@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Button, TextInput, Alert } from 'react-native';
+import { View, Text, StyleSheet, Button, TextInput, Alert, TouchableOpacity } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/AppNavigator';
 import { loadCompetencies, updateCompetency, removeCompetency } from '../services/storage';
 import { Competency } from '../types';
 import ProgressBar from '../components/ProgressBar';
 import { v4 as uuidv4 } from 'uuid';
+import {stylesSkills} from '../styles/styles';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Detail'>;
 
@@ -64,16 +65,22 @@ export default function DetailScreen({ route, navigation }: Props) {
   if (!item) return <View style={{flex:1,alignItems:'center',justifyContent:'center'}}><Text>Carregando...</Text></View>;
 
   return (
-    <View style={{ padding: 12 }}>
+    <View style={[stylesSkills.container, { flex: 1 }]}>
       <Text style={styles.title}>{item.title}</Text>
       <Text style={styles.desc}>{item.description}</Text>
 
       <View style={{ marginVertical: 12 }}>
         <ProgressBar value={item.progress} />
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 10 }}>
-          <Button title="-10" onPress={() => changeProgress(-10)} />
-          <Button title="+10" onPress={() => changeProgress(10)} />
-          <Button title="Reset" onPress={() => changeProgress(-item.progress)} />
+          <TouchableOpacity style={stylesSkills.changeButton} onPress={() => changeProgress(-10)}>
+            <Text style={stylesSkills.addButtonText}>-10</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={stylesSkills.changeButton} onPress={() => changeProgress(10)}>
+            <Text style={stylesSkills.addButtonText}>+10</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={stylesSkills.resetButton} onPress={() => changeProgress(-item.progress)}>
+            <Text style={stylesSkills.addButtonText}>Reset</Text>
+          </TouchableOpacity>
         </View>
       </View>
 
@@ -86,8 +93,10 @@ export default function DetailScreen({ route, navigation }: Props) {
           </View>
         ))}
 
-        <TextInput placeholder="Nova milestone" value={newMilestoneLabel} onChangeText={setNewMilestoneLabel} style={styles.input} />
-        <Button title="Adicionar milestone" onPress={addMilestone} />
+        <TextInput placeholder="Nova milestone" value={newMilestoneLabel} onChangeText={setNewMilestoneLabel} style={stylesSkills.input} />
+        <TouchableOpacity style={stylesSkills.addButton} onPress={addMilestone}>
+          <Text style={stylesSkills.addButtonText}>Adicionar Milestone</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );

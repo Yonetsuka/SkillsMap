@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, StyleSheet, Button, ActivityIndicator, Alert } from 'react-native';
+import { View, Text, FlatList, StyleSheet, Button, ActivityIndicator, Alert, TouchableOpacity } from 'react-native';
+import { stylesSkills } from '../styles/styles';
 import { loadCompetencies, removeCompetency } from '../services/storage';
 import { useIsFocused } from '@react-navigation/native';
 import CompetencyCard from '../components/CompetencyCard';
@@ -42,11 +43,11 @@ export default function HomeScreen({ navigation }: Props) {
   useEffect(() => { if (isFocused) load(); }, [isFocused]);
 
   return (
-    <View style={{ flex: 1 }}>
-      <View style={styles.header}>
-        <Text style={styles.heading}>Minhas competências</Text>
-        <Button title="Adicionar" onPress={() => navigation.navigate('Add')} />
-      </View>
+    <View style={stylesSkills.container}>
+      <Text style={stylesSkills.title}>Minhas competências</Text>
+      <TouchableOpacity style={stylesSkills.addButton} onPress={() => navigation.navigate('Add')}>
+        <Text style={stylesSkills.addButtonText}>Adicionar</Text>
+      </TouchableOpacity>
 
       {loading ? <ActivityIndicator style={{ marginTop: 20 }} /> : (
         <FlatList
